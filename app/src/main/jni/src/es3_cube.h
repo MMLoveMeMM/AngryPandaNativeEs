@@ -19,12 +19,6 @@ public:
     void destroy();
 
 public:
-    void matrixLoadIdentity(Matrix *result);
-    void matrixMultiply(Matrix *result, Matrix *srcA, Matrix *srcB);
-    void frustum(Matrix *result, float w, float h, float nearZ,
-            float farZ);
-    void translate(Matrix *result, GLfloat tx, GLfloat ty, GLfloat tz);
-    void rotate(Matrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
     void update(float deltaTime);
 private:
     GLuint program;

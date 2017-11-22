@@ -1,5 +1,5 @@
 #include "es3_cube.h"
-
+#include "es3_matrix.h"
 const char VERTEX_SHADER[] =
                 "#version 300 es\n"
                 "layout(location = " STRV(POSITION_IND) ") in vec4 a_position;\n"
@@ -100,130 +100,26 @@ const GLfloat cubeColor[] =
                 1.0f, 0.0f, 1.0f, 0.0f
         };
 
-void es3cube::matrixLoadIdentity(Matrix *result) {
-    memset(result, 0, sizeof(Matrix));
-    result->m[0][0] = 1.0f;
-    result->m[1][1] = 1.0f;
-    result->m[2][2] = 1.0f;
-    result->m[3][3] = 1.0f;
-}
-void es3cube::matrixMultiply(Matrix *result, Matrix *srcA, Matrix *srcB) {
-    Matrix tmp;
-    int i;
-    for (i = 0; i < 4; i++) {
-        tmp.m[i][0] = (srcA->m[i][0] * srcB->m[0][0]) +
-                      (srcA->m[i][1] * srcB->m[1][0]) +
-                      (srcA->m[i][2] * srcB->m[2][0]) +
-                      (srcA->m[i][3] * srcB->m[3][0]);
-        tmp.m[i][1] = (srcA->m[i][0] * srcB->m[0][1]) +
-                      (srcA->m[i][1] * srcB->m[1][1]) +
-                      (srcA->m[i][2] * srcB->m[2][1]) +
-                      (srcA->m[i][3] * srcB->m[3][1]);
-        tmp.m[i][2] = (srcA->m[i][0] * srcB->m[0][2]) +
-                      (srcA->m[i][1] * srcB->m[1][2]) +
-                      (srcA->m[i][2] * srcB->m[2][2]) +
-                      (srcA->m[i][3] * srcB->m[3][2]);
-        tmp.m[i][3] = (srcA->m[i][0] * srcB->m[0][3]) +
-                      (srcA->m[i][1] * srcB->m[1][3]) +
-                      (srcA->m[i][2] * srcB->m[2][3]) +
-                      (srcA->m[i][3] * srcB->m[3][3]);
-    }
-    memcpy(result, &tmp, sizeof(Matrix));
-}
-void es3cube::frustum(Matrix *result, float w, float h, float nearZ,
-        float farZ) {
-    float left = -w;
-    float right = w;
-    float bottom = -h;
-    float top = h;
-    float deltaX = right - left;
-    float deltaY = top - bottom;
-    float deltaZ = farZ - nearZ;
-    Matrix frust;
-    if ((nearZ <= 0.0f) || (farZ <= 0.0f) ||
-        (deltaX <= 0.0f) || (deltaY <= 0.0f) || (deltaZ <= 0.0f)) {
-        return;
-    }
-    frust.m[0][0] = 2.0f * nearZ / deltaX;
-    frust.m[0][1] = frust.m[0][2] = frust.m[0][3] = 0.0f;
-    frust.m[1][1] = 2.0f * nearZ / deltaY;
-    frust.m[1][0] = frust.m[1][2] = frust.m[1][3] = 0.0f;
-    frust.m[2][0] = (right + left) / deltaX;
-    frust.m[2][1] = (top + bottom) / deltaY;
-    frust.m[2][2] = -(nearZ + farZ) / deltaZ;
-    frust.m[2][3] = -1.0f;
-    frust.m[3][2] = -2.0f * nearZ * farZ / deltaZ;
-    frust.m[3][0] = frust.m[3][1] = frust.m[3][3] = 0.0f;
-    matrixMultiply(result, &frust, result);
-}
-void es3cube::translate(Matrix *result, GLfloat tx, GLfloat ty, GLfloat tz) {
-    result->m[3][0] += (result->m[0][0] * tx + result->m[1][0] * ty + result->m[2][0] * tz);
-    result->m[3][1] += (result->m[0][1] * tx + result->m[1][1] * ty + result->m[2][1] * tz);
-    result->m[3][2] += (result->m[0][2] * tx + result->m[1][2] * ty + result->m[2][2] * tz);
-    result->m[3][3] += (result->m[0][3] * tx + result->m[1][3] * ty + result->m[2][3] * tz);
-}
-void es3cube::rotate(Matrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z) {
-    GLfloat sinAngle, cosAngle;
-    GLfloat mag = sqrtf(x * x + y * y + z * z);
-    sinAngle = sinf(float(angle * PI / 180.0f));
-    cosAngle = cosf(float(angle * PI / 180.0f));
-    if (mag > 0.0f) {
-        GLfloat xx, yy, zz, xy, yz, zx, xs, ys, zs;
-        GLfloat oneMinusCos;
-        Matrix rotMat;
-        x /= mag;
-        y /= mag;
-        z /= mag;
-        xx = x * x;
-        yy = y * y;
-        zz = z * z;
-        xy = x * y;
-        yz = y * z;
-        zx = z * x;
-        xs = x * sinAngle;
-        ys = y * sinAngle;
-        zs = z * sinAngle;
-        oneMinusCos = 1.0f - cosAngle;
-        rotMat.m[0][0] = (oneMinusCos * xx) + cosAngle;
-        rotMat.m[0][1] = (oneMinusCos * xy) - zs;
-        rotMat.m[0][2] = (oneMinusCos * zx) + ys;
-        rotMat.m[0][3] = 0.0F;
-        rotMat.m[1][0] = (oneMinusCos * xy) + zs;
-        rotMat.m[1][1] = (oneMinusCos * yy) + cosAngle;
-        rotMat.m[1][2] = (oneMinusCos * yz) - xs;
-        rotMat.m[1][3] = 0.0F;
-        rotMat.m[2][0] = (oneMinusCos * zx) - ys;
-        rotMat.m[2][1] = (oneMinusCos * yz) + xs;
-        rotMat.m[2][2] = (oneMinusCos * zz) + cosAngle;
-        rotMat.m[2][3] = 0.0F;
-        rotMat.m[3][0] = 0.0F;
-        rotMat.m[3][1] = 0.0F;
-        rotMat.m[3][2] = 0.0F;
-        rotMat.m[3][3] = 1.0F;
-        matrixMultiply(result, &rotMat, result);
-    }
-}
-
 void es3cube::update(float deltaTime) {
     Matrix *matrixBuf;
     Matrix perspective;
-    matrixLoadIdentity(&perspective);
+    es3matrix::matrixLoadIdentity(&perspective);
     GLfloat frustumW, frustumH;
     frustumH = tanf(float(60.0f / 360.0f * PI)) * 1.5f;
     frustumW = frustumH * aspect;
-    frustum(&perspective, frustumW, frustumH, 1.0f, 20.0f);
+    es3matrix::frustum(&perspective, frustumW, frustumH, 1.0f, 20.0f);
     glBindBuffer(GL_ARRAY_BUFFER, mvpVBO);
     matrixBuf = (Matrix *) glMapBufferRange(GL_ARRAY_BUFFER, 0, sizeof(Matrix),
                                             GL_MAP_WRITE_BIT);
     Matrix modelview;
-    matrixLoadIdentity(&modelview);
-    translate(&modelview, 0, 0, -2.0f);
+    es3matrix::matrixLoadIdentity(&modelview);
+    es3matrix::translate(&modelview, 0, 0, -2.0f);
     angle += (deltaTime * 40.0f);
     if (angle >= 360.0f) {
         angle -= 360.0f;
     }
-    rotate(&modelview, angle, 1.0, 0.0, 1.0);
-    matrixMultiply(&matrixBuf[0], &modelview, &perspective);
+    es3matrix::rotate(&modelview, angle, 1.0, 0.0, 1.0);
+    es3matrix::matrixMultiply(&matrixBuf[0], &modelview, &perspective);
     glUnmapBuffer(GL_ARRAY_BUFFER);
 }
 

@@ -9,7 +9,8 @@ LOCAL_SRC_FILES := src/es3_triangleex.cpp \
                     src/es3_rect.cpp \
                     RectRenderer.cpp \
                     src/es3_cube.cpp \
-                    src/es3_matrix.cpp
+                    src/es3_matrix.cpp \
+                    CubeRenderer.cpp \
 
 LOCAL_C_INCLUDES := ./ \
                     src/es3_rect.h \

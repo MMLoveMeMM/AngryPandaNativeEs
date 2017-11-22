@@ -20,13 +20,13 @@ public:
     es3matrix();
     ~es3matrix();
 public:
-    void matrixLoadIdentity(Matrix *result);
-    void matrixMultiply(Matrix *result, Matrix *srcA, Matrix *srcB);
-    void frustum(Matrix *result, float w, float h, float nearZ,
+    static void matrixLoadIdentity(Matrix *result);
+    static void matrixMultiply(Matrix *result, Matrix *srcA, Matrix *srcB);
+    static void frustum(Matrix *result, float w, float h, float nearZ,
             float farZ);
-    void translate(Matrix *result, GLfloat tx, GLfloat ty, GLfloat tz);
-    void rotate(Matrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
-    void update(float deltaTime);
+    static void translate(Matrix *result, GLfloat tx, GLfloat ty, GLfloat tz);
+    static void rotate(Matrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
+    static void update(float deltaTime);
 };
 
 #endif //__H_ES3_MATRIX_H__
