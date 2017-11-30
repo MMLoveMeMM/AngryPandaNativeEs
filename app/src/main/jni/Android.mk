@@ -4,7 +4,8 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := nativeses
 
-LOCAL_SRC_FILES := src/es3_triangleex.cpp \
+LOCAL_SRC_FILES :=./glm/detail/*.* ./glm/gtc/*.* ./glm/gtx/*.* ./glm/simd/*.* ./glm/*.*
+LOCAL_SRC_FILES += src/es3_triangleex.cpp \
                     src/es3_shader.cpp \
                     src/es3_rect.cpp \
                     RectRenderer.cpp \

@@ -125,11 +125,19 @@ void es3cube::update(float deltaTime) {
 
 bool es3cube::init()
 {
+    /*
+    * 加载编译glsl
+    */
     program = es3shader::createProgram(VERTEX_SHADER, FRAGMENT_SHADER);
     if (!program)
+    {
         return false;
-    glGenBuffers(1, &positionVBO);
-    glBindBuffer(GL_ARRAY_BUFFER, positionVBO);
+    }
+
+    // 函数参照readme.txt
+    glGenBuffers(1, &positionVBO); // 产生缓存区
+    glBindBuffer(GL_ARRAY_BUFFER, positionVBO); // 通过上面的索引句柄绑定缓冲区
+    // 拷贝数据到缓存区,GL_STATIC_DRAW :数据不会或几乎不会改变
     glBufferData(GL_ARRAY_BUFFER, VERTEX_NUM * sizeof(GLfloat), VERTEX_POS, GL_STATIC_DRAW);
     glGenBuffers(1, &colorVBO);
     glBindBuffer(GL_ARRAY_BUFFER, colorVBO);
@@ -196,6 +204,9 @@ void es3cube::render()
 
 void es3cube::destroy()
 {
+    /*
+    * 清除产生的缓存区
+    */
     glDeleteBuffers(1, &positionVBO);
     glDeleteBuffers(1, &colorVBO);
     glDeleteBuffers(1, &mvpVBO);
