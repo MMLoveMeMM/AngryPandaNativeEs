@@ -32,12 +32,14 @@ void GLRenderer::nativeSurfaceCreated() {
 }
 
 void GLRenderer::nativeSurfaceChanged(EGLint width, EGLint height) {
+    // 正投影
     projection = glm::ortho(-1.0f, 1.0f, -(float) height / width, (float) height / width, 5.0f,
                             7.0f);
+    // 透视
 //    projection = glm::perspective(glm::radians(50.0f), (float)width/height, 5.0f ,7.0f);
-    view = glm::lookAt(glm::vec3(0.0f, 0.0f, 6.0f),
-                       glm::vec3(0.0f, 0.0f, 0.0f),
-                       glm::vec3(0.0f, 1.0f, 0.0f));
+    view = glm::lookAt(glm::vec3(0.0f, 0.0f, 6.0f), // 相机
+                       glm::vec3(0.0f, 0.0f, 0.0f), // 相机法线
+                       glm::vec3(0.0f, 1.0f, 0.0f)); //
     glViewport(0, 0, width, height);
 }
 
