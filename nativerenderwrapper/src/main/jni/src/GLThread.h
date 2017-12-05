@@ -34,7 +34,7 @@ public:
 
     GLRenderer mRenderer;
 public:
-    GLThread();
+    GLThread(void* pixels);
     ~GLThread();
     void onRenderThreadRun();
 

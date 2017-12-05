@@ -1,6 +1,7 @@
 package com.panda.org.nativerenderwrapper;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceView;
@@ -44,6 +45,8 @@ public class NativeSurfaceView extends SurfaceView implements SurfaceHolder.Call
     private static native void nativeSurfaceDestroyed();
 
     private static native void nativeStartRender();
+
+    private static native void nativeStartTextureRender(Bitmap bitmap);//带一张纹理图下去
 
     private static native void nativeRequestRender();
     static {

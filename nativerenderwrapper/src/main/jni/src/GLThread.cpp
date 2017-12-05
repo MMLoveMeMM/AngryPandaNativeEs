@@ -3,7 +3,8 @@
 #include "GLThread.h"
 #include "esUtils.h"
 #include "GLRenderer.h"
-GLThread::GLThread()
+
+GLThread::GLThread(void* pixels)
 {
     pthread_mutex_init(&mMutex, NULL);
     pthread_cond_init(&mCondVar, NULL);
@@ -136,11 +137,9 @@ void GLThread::terminateDisplay() {
 
 void GLThread::requestInitEGL(ANativeWindow * pWindow)
 {
-    LOGI(1, "-------requestInitEGL");
     pthread_mutex_lock(&mMutex);
     mWindow = pWindow;
     mEnumRenderEvent = RE_SURFACE_CHANGED;
-    LOGI(1, "-------mEnumRenderEvent=%d", mEnumRenderEvent);
     pthread_mutex_unlock(&mMutex);
     pthread_cond_signal(&mCondVar);
 }

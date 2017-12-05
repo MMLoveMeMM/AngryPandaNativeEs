@@ -219,6 +219,14 @@ JNIEXPORT void JNICALL Java_com_panda_org_nativerenderwrapper_NativeSurfaceView_
 
 /*
  * Class:     com_panda_org_nativerenderwrapper_NativeSurfaceView
+ * Method:    nativeStartTextureRender
+ * Signature: (Landroid/graphics/Bitmap;)V
+ */
+JNIEXPORT void JNICALL Java_com_panda_org_nativerenderwrapper_NativeSurfaceView_nativeStartTextureRender
+  (JNIEnv *, jclass, jobject);
+
+/*
+ * Class:     com_panda_org_nativerenderwrapper_NativeSurfaceView
  * Method:    nativeRequestRender
  * Signature: ()V
  */

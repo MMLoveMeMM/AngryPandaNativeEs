@@ -17,7 +17,7 @@ public:
     GLfloat* mColorArray;
 
     void initVertex();
-    void initGL(const char * vertexShaderCode, const char* fragmentShaderCode);
+    void initShader(const char * vertexShaderCode, const char* fragmentShaderCode);
     void draw(float mvpMatrix[]);
     virtual ~Triangle();
     Triangle();

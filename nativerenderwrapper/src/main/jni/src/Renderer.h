@@ -15,11 +15,15 @@ public :
     Renderer();
     virtual ~Renderer();
 
+    virtual void nativeTexturePixels(void* pixels){};
+
     virtual void nativeSurfaceCreated(){};
 
     virtual void nativeSurfaceChanged(EGLint width, EGLint height){};
 
     virtual void nativeDraw(){};
+
+    void* pixels;
 };
 #ifdef __cplusplus
 }

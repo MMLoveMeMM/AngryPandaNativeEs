@@ -14,6 +14,8 @@ public:
     void requestRenderFrame();
     void requestDestroy();
 
+    virtual void nativeTexturePixels(void* pixels);
+
     virtual void nativeSurfaceCreated();
 
     virtual void nativeSurfaceChanged(EGLint width, EGLint height);
