@@ -29,6 +29,7 @@ JNIEXPORT void JNICALL Java_com_panda_org_nativerenderwrapper_NativeSurfaceView_
     mGLThread->requestDestroy();
     ANativeWindow_release(mWindow);
     delete mGLThread;
+    LOGI("Java_com_panda_org_nativerenderwrapper_NativeSurfaceView_nativeSurfaceDestroyed END");
   }
 
 /*

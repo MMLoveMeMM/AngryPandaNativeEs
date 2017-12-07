@@ -11,6 +11,8 @@ LOCAL_SRC_FILES += src/esUtils.cpp \
                     src/shape/Triangle.cpp \
                     src/shape/TriangleBuff.cpp \
                     src/shape/TriangleTexture.cpp \
+                    src/shape/TriangleDepth.cpp \
+                    src/shape/TriangleStencil.cpp \
                     src/GLThread.cpp \
                     src/Renderer.cpp \
                     src/GLRenderer.cpp \

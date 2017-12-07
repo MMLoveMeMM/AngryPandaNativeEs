@@ -35,6 +35,11 @@ public class NativeSurfaceView extends SurfaceView implements SurfaceHolder.Call
         nativeSurfaceChanged(holder.getSurface());
     }
 
+    public void surfaceDestroyed() {
+        // ANativeWindow 需要上层将surface对象传入用于覆盖图形数据
+        nativeSurfaceDestroyed();
+    }
+
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         nativeSurfaceDestroyed();

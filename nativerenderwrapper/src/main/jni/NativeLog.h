@@ -2,7 +2,7 @@
 #define __H_NATIVE_LOG_H__
 #include <android/log.h>
 #include<jni.h>
-#define TAG "angrypanda"
+#define TAG "angry0panda"
 #define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, TAG, __VA_ARGS__)
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG , TAG, __VA_ARGS__)
 //#define LOGI(...) __android_log_print(ANDROID_LOG_INFO  , TAG, __VA_ARGS__)

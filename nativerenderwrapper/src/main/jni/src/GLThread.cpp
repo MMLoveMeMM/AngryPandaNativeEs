@@ -30,10 +30,10 @@ void GLThread::onRenderThreadRun()
         // 每完成一个事件就wait在这里直到有其他事件唤醒
         pthread_cond_wait(&mCondVar, &mMutex);
 
-        LOGI(1, "-------this mEnumRenderEvent is %d", mEnumRenderEvent);
+        LOGI(" this mEnumRenderEvent is %d", mEnumRenderEvent);
         switch (mEnumRenderEvent) {
             case RE_SURFACE_CHANGED:
-                LOGI(1, "-------case RE_SURFACE_CHANGED");
+                LOGI(" case RE_SURFACE_CHANGED");
                 mEnumRenderEvent = RE_NONE;
                 pthread_mutex_unlock(&mMutex);
                 initEGL();
@@ -52,12 +52,12 @@ void GLThread::onRenderThreadRun()
                 pthread_mutex_unlock(&mMutex);
                 terminateDisplay();
                 mISRenderering = false;
+                LOGI("status machine RE_EXIT");
                 break;
             default:
                 mEnumRenderEvent = RE_NONE;
                 pthread_mutex_unlock(&mMutex);
         }
-
 
     }
 }
@@ -102,7 +102,6 @@ void GLThread::initEGL()
     context = eglCreateContext(display, config, NULL, attrs);
 
     if (eglMakeCurrent(display, surface, surface, context) == EGL_FALSE) {
-        LOGI(1, "------EGL-FALSE");
         return ;
     }
 
@@ -114,7 +113,7 @@ void GLThread::initEGL()
     mContext = context;
     mWidth = width;
     mHeight = height;
-    LOGI(1, "width:%d, height:%d", mWidth, mHeight);
+    LOGI("width:%d, height:%d", mWidth, mHeight);
 
 }
 
@@ -158,6 +157,7 @@ void GLThread::requestDestroy()
     mEnumRenderEvent = RE_EXIT;
     pthread_mutex_unlock(&mMutex);
     pthread_cond_signal(&mCondVar);
+    LOGI("requestDestroy");
 }
 
 
