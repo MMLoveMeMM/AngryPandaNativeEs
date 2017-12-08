@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.panda.org.angrypandanativees.basic.BasicGLSurfaceView;
+import com.panda.org.angrypandanativees.blend.BlendActivity;
+import com.panda.org.angrypandanativees.stencil.StencilActivity;
 import com.panda.org.nativerenderwrapper.NSActivity;
 
 public class MainActivity extends Activity implements View.OnClickListener{
@@ -51,7 +53,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         switch (id)
         {
             case R.id.nsbtn:
-                Intent intent = new Intent(MainActivity.this, NSActivity.class);
+                Intent intent = new Intent(MainActivity.this, BlendActivity.class/*StencilActivity.class*//*NSActivity.class*/);
                 startActivity(intent);
                 break;
         }

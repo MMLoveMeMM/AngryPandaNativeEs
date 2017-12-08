@@ -1,4 +1,5 @@
 import org.apache.tools.ant.taskdefs.condition.Os
+
 apply plugin: 'com.android.application'
 
 android {
@@ -21,7 +22,7 @@ android {
 
     sourceSets {
         main {
-            jni.srcDirs=[]
+            jni.srcDirs = []
             jniLibs.srcDirs 'src/main/libs'
         }
     }
