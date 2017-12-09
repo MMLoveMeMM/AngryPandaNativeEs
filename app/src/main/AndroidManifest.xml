@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".stencil.StencilActivity" />
-        <activity android:name=".blend.BlendActivity"></activity>
+        <activity android:name=".blend.BlendActivity" />
+        <activity android:name=".depth.DepthActivity"></activity>
     </application>
 
 </manifest>

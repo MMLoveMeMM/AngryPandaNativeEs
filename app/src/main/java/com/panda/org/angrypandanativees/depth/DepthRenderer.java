@@ -1,8 +1,10 @@
-package com.panda.org.angrypandanativees.blend;
+package com.panda.org.angrypandanativees.depth;
 
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
+
+import com.panda.org.angrypandanativees.blend.Tangle;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -11,10 +13,10 @@ import javax.microedition.khronos.opengles.GL10;
  * Created by rd0348 on 2017/12/8 0008.
  */
 
-public class BlendRenderer implements GLSurfaceView.Renderer {
+public class DepthRenderer implements GLSurfaceView.Renderer {
 
     private boolean openStencilTest;
-    private Tangle mShape;
+    private DTriangle mShape;
 
     public float yAngle;
     public float xAngle;
@@ -22,7 +24,7 @@ public class BlendRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.5f, 0.5f, 0.5f, 1);
-        mShape = new Tangle();
+        mShape = new DTriangle();
     }
 
     @Override
@@ -49,17 +51,16 @@ public class BlendRenderer implements GLSurfaceView.Renderer {
         Matrix.multiplyMM(mMVPMatrix, 0, mViewProjectionMatrix, 0, mModuleMatrix, 0);
 
         if(openStencilTest){
-            // 开启混合
-            // 开启混合后,重叠的片源颜色将重叠混合
-            mShape.drawRanctangle(mMVPMatrix);
-            GLES20.glEnable(GLES20.GL_BLEND);
-            GLES20.glBlendFunc(GLES20.GL_DST_COLOR, GLES20.GL_ONE_MINUS_DST_COLOR);
+            GLES20.glClearDepthf(1.0f);
+            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+            // 开启深度测试
+            GLES20.glEnable(GLES20.GL_DEPTH_TEST);
+            GLES20.glDepthFunc(GLES20.GL_LESS); //基准设置为 1.0，那么GL_LESS 则深度小余 1.0 的通过测试
+            //GLES20.glBlendFunc(GLES20.GL_DST_COLOR, GLES20.GL_ONE_MINUS_DST_COLOR);
             mShape.drawTrangle(mMVPMatrix);
-            GLES20.glDisable(GLES20.GL_BLEND);
         }else{
-            // 关闭混合
-            mShape.drawRanctangle(mMVPMatrix);
-            GLES20.glBlendFunc(GLES20.GL_DST_COLOR, GLES20.GL_ONE_MINUS_DST_COLOR);
+            // 关闭深度测试
+            //GLES20.glBlendFunc(GLES20.GL_DST_COLOR, GLES20.GL_ONE_MINUS_DST_COLOR);
             mShape.drawTrangle(mMVPMatrix);
         }
 
