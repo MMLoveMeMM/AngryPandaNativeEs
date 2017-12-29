@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AngryPandaNativeEs.iml" filepath="$PROJECT_DIR$/AngryPandaNativeEs.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/assimpwrapper/assimpwrapper.iml" filepath="$PROJECT_DIR$/assimpwrapper/assimpwrapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/eswrapper/eswrapper.iml" filepath="$PROJECT_DIR$/eswrapper/eswrapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/nativerenderwrapper/nativerenderwrapper.iml" filepath="$PROJECT_DIR$/nativerenderwrapper/nativerenderwrapper.iml" />
     </modules>

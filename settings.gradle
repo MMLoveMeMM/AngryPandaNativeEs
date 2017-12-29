@@ -1,1 +1,1 @@
-include ':app', ':nativerenderwrapper', ':eswrapper'
+include ':app', ':nativerenderwrapper', ':eswrapper', ':assimpwrapper'
