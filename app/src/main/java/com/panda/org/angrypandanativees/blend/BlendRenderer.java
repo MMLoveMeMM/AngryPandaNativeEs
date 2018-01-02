@@ -52,8 +52,10 @@ public class BlendRenderer implements GLSurfaceView.Renderer {
             // 开启混合
             // 开启混合后,重叠的片源颜色将重叠混合
             mShape.drawRanctangle(mMVPMatrix);
+
             GLES20.glEnable(GLES20.GL_BLEND);
             GLES20.glBlendFunc(GLES20.GL_DST_COLOR, GLES20.GL_ONE_MINUS_DST_COLOR);
+
             mShape.drawTrangle(mMVPMatrix);
             GLES20.glDisable(GLES20.GL_BLEND);
         }else{

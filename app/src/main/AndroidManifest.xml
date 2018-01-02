@@ -20,7 +20,8 @@
         <activity android:name=".blend.BlendActivity" />
         <activity android:name=".depth.DepthActivity" />
         <activity android:name=".multitexture.MultitextureActivity" />
-        <activity android:name=".blendtexture.BlendTextureActivity"></activity>
+        <activity android:name=".blendtexture.BlendTextureActivity" />
+        <activity android:name=".effecttexture.EffectTextureActivity"></activity>
     </application>
 
 </manifest>

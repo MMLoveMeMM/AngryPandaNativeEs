@@ -1,38 +1,34 @@
-package com.panda.org.angrypandanativees.multitexture;
+package com.panda.org.angrypandanativees.effecttexture;
 
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
+import com.panda.org.angrypandanativees.effecttexture.shape.EffectTriangleShape;
 import com.panda.org.angrypandanativees.matrix.MatrixState;
-import com.panda.org.angrypandanativees.multitexture.shape.TriangleShape;
-import com.panda.org.angrypandanativees.multitexture.shape.TriangleShape2;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 /**
- * Created by rd0348 on 2017/12/29 0029.
+ * Created by rd0348 on 2018/1/2 0002.
  */
 
-public class MultitextureRenderer implements GLSurfaceView.Renderer {
-
-    private TriangleShape mTriangleShape;
-    private TriangleShape2 mTriangleShape2;
+public class EffectTextureRenderer implements GLSurfaceView.Renderer {
 
     private Context mContext;
-    public MultitextureRenderer(Context context){
+    private EffectTriangleShape mEffectTriangleShape;
+    public EffectTextureRenderer(Context context){
         mContext=context;
     }
+
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0,0,0,0);
         GLES20.glEnable(GLES20.GL_CULL_FACE);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
-        mTriangleShape=new TriangleShape(mContext);
-        mTriangleShape2=new TriangleShape2(mContext);
-
+        mEffectTriangleShape=new EffectTriangleShape(mContext);
     }
 
     @Override
@@ -57,14 +53,8 @@ public class MultitextureRenderer implements GLSurfaceView.Renderer {
     public void onDrawFrame(GL10 gl) {
         GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT|GLES20.GL_COLOR_BUFFER_BIT);
 
-        GLES20.glEnable(GLES20.GL_BLEND);
-        GLES20.glBlendEquation(GLES20.GL_FUNC_ADD);
-        //GLES20.glBlendFunc(GLES20.GL_DST_COLOR, GLES20.GL_ONE_MINUS_DST_COLOR);
-        GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_COLOR);
-
         MatrixState.pushMatrix();
-        mTriangleShape.draw(0);
-        mTriangleShape2.draw(0);
+        mEffectTriangleShape.draw(0);
         MatrixState.popMatrix();
     }
 
