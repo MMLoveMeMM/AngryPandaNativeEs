@@ -23,7 +23,8 @@
         <activity android:name=".blendtexture.BlendTextureActivity" />
         <activity android:name=".effecttexture.EffectTextureActivity" />
         <activity android:name=".test.ScissorActivity" />
-        <activity android:name=".zero.ZeroActivity"></activity>
+        <activity android:name=".zero.ZeroActivity" />
+        <activity android:name=".light.LightActivity"></activity>
     </application>
 
 </manifest>

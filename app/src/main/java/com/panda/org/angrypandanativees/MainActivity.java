@@ -11,6 +11,7 @@ import com.panda.org.angrypandanativees.blend.BlendActivity;
 import com.panda.org.angrypandanativees.blendtexture.BlendTextureActivity;
 import com.panda.org.angrypandanativees.depth.DepthActivity;
 import com.panda.org.angrypandanativees.effecttexture.EffectTextureActivity;
+import com.panda.org.angrypandanativees.light.LightActivity;
 import com.panda.org.angrypandanativees.multitexture.MultitextureActivity;
 import com.panda.org.angrypandanativees.stencil.StencilActivity;
 import com.panda.org.angrypandanativees.zero.ZeroActivity;
@@ -58,7 +59,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         switch (id)
         {
             case R.id.nsbtn:
-                Intent intent = new Intent(MainActivity.this, ZeroActivity.class/*BlendTextureActivity.class*//*EffectTextureActivity.class*//*MultitextureActivity.class*//*DepthActivity.class*//*BlendActivity.class*//*StencilActivity.class*//*NSActivity.class*/);
+                Intent intent = new Intent(MainActivity.this, LightActivity.class/*ZeroActivity.class*//*BlendTextureActivity.class*//*EffectTextureActivity.class*//*MultitextureActivity.class*//*DepthActivity.class*//*BlendActivity.class*//*StencilActivity.class*//*NSActivity.class*/);
                 startActivity(intent);
                 break;
         }
