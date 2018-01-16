@@ -1,11 +1,11 @@
-package com.panda.org.angrypandanativees.multitexture.shape;
+package com.panda.org.angrypandanativees.zero.shape;
 
 import android.content.Context;
 import android.opengl.GLES20;
 
 import com.panda.org.angrypandanativees.R;
-import com.panda.org.angrypandanativees.matrix.MatrixState;
 import com.panda.org.angrypandanativees.abs.AbstractVertexTexture;
+import com.panda.org.angrypandanativees.matrix.MatrixState;
 import com.panda.org.angrypandanativees.shader.ShaderParse;
 
 import java.nio.ByteBuffer;
@@ -13,10 +13,10 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 /**
- * Created by rd0348 on 2017/12/29 0029.
+ * Created by rd0348 on 2018/1/16 0016.
  */
 
-public class TriangleShape2 extends AbstractVertexTexture {
+public class ZeroShape extends AbstractVertexTexture {
 
     private Context context;
     private int mMVPMatrixHandle;
@@ -33,14 +33,14 @@ public class TriangleShape2 extends AbstractVertexTexture {
 
     private float mType;
 
-    public TriangleShape2(Context context) {
+    public ZeroShape(Context context) {
         this.context = context;
 
         initVertices();
         initTexture(0);
         initShader();
 
-        mType=0;
+        mType=3;
     }
 
     public void setType(float type){
@@ -51,13 +51,13 @@ public class TriangleShape2 extends AbstractVertexTexture {
     public void initVertices() {
 
         float[] vertices = new float[]{
-                0.5f, 0.5f, 0,
-                1.5f, 0.5f, 0,
-                0.5f, 1.5f, 0,
+                0, 0, 0,
+                1, 0, 0,
+                0, 1, 0,
 
-                1.5f, 0.5f, 0,
-                1.5f, 1.5f, 0,
-                0.5f, 1.5f, 0
+                1, 0, 0,
+                1, 1, 0,
+                0, 1, 0
         };
 
         ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length * 4);
@@ -87,8 +87,8 @@ public class TriangleShape2 extends AbstractVertexTexture {
     @Override
     public void initShader() {
 
-        String vertex_src = ShaderParse.loadFromAssetsFile("vertex_triangle_vertex2.glsl", context.getResources());//
-        String frag_src = ShaderParse.loadFromAssetsFile("vertex_triangle_frag2.glsl", context.getResources());//
+        String vertex_src = ShaderParse.loadFromAssetsFile("zero_triangle_vertex.glsl", context.getResources());//
+        String frag_src = ShaderParse.loadFromAssetsFile("zero_triangle_frag.glsl", context.getResources());//
 
         mProgram = ShaderParse.createProgram(vertex_src, frag_src);
 

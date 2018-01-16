@@ -5,7 +5,7 @@ import android.opengl.GLES20;
 
 import com.panda.org.angrypandanativees.R;
 import com.panda.org.angrypandanativees.matrix.MatrixState;
-import com.panda.org.angrypandanativees.multitexture.AbstractVertexTexture;
+import com.panda.org.angrypandanativees.abs.AbstractVertexTexture;
 import com.panda.org.angrypandanativees.shader.ShaderParse;
 
 import java.nio.ByteBuffer;
