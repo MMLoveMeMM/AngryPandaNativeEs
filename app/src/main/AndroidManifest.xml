@@ -24,7 +24,8 @@
         <activity android:name=".effecttexture.EffectTextureActivity" />
         <activity android:name=".test.ScissorActivity" />
         <activity android:name=".zero.ZeroActivity" />
-        <activity android:name=".light.LightActivity"></activity>
+        <activity android:name=".light.LightActivity" />
+        <activity android:name=".fog.FogActivity"></activity>
     </application>
 
 </manifest>

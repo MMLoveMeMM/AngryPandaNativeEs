@@ -130,11 +130,12 @@ public class LightShape extends AbstractVertexTexture {
     public void initShader() {
 
         /*
-        * light1_triangle_vertex : 环境光影响
+        * light_triangle_vertex : 反射光影响
         * light1_triangle_vertex : 三种光源
+        * light2_triangle_vertex : 仅仅环境光
         * */
-        String vertex_src = ShaderParse.loadFromAssetsFile("light1_triangle_vertex.glsl", context.getResources());//
-        String frag_src = ShaderParse.loadFromAssetsFile("light1_triangle_frag.glsl", context.getResources());//
+        String vertex_src = ShaderParse.loadFromAssetsFile("light2_triangle_vertex.glsl", context.getResources());//
+        String frag_src = ShaderParse.loadFromAssetsFile("light2_triangle_frag.glsl", context.getResources());//
 
         mProgram = ShaderParse.createProgram(vertex_src, frag_src);
 
