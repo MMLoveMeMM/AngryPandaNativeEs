@@ -1,5 +1,7 @@
 #include "esMatrix.h"
-
+/*
+* 矩阵运算类
+*/
 glm::mat4 GLMatrix::projection=glm::mat4(1.0);
 glm::mat4 GLMatrix::view=glm::mat4(1.0);
 glm::mat4 GLMatrix::model=glm::mat4(1.0);

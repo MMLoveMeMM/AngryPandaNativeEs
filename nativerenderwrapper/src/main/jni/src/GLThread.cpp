@@ -3,7 +3,9 @@
 #include "GLThread.h"
 #include "esUtils.h"
 #include "GLRenderer.h"
-
+/*
+* 实现
+*/
 GLThread::GLThread(void* pixels)
 {
     pthread_mutex_init(&mMutex, NULL);
